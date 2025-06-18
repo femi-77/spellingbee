@@ -1,0 +1,111 @@
+h1{
+    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-size: 65px;
+    color: rgb(23, 57, 129);
+    text-align: center;
+    margin-top: auto;
+}
+h2{
+    text-align: center;
+    font-size: 40px;
+    color: rgb(25, 25, 228);
+}
+
+#start{
+    font-size: 40px;
+    padding: 30px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 100px;
+    margin-bottom: auto;
+    text-align: center;
+    align-items: center;
+    border-radius: 10px;
+    border-color: rgb(22, 22, 139);
+    color: rgb(17, 131, 231);
+    font-family:Georgia, 'Times New Roman', Times, serif;}
+#Options{
+    padding: 20px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    border-radius: 10px;
+    border-color: rgb(22, 22, 139);
+    color: rgb(17, 131, 231);
+}
+#Options button{
+    padding: 20px;
+    
+    text-align: center;
+    border-radius: 10px;
+    border-color: rgb(93, 19, 212);
+    color: rgb(79, 1, 180);
+    background-color: rgb(211, 230, 238);
+    font-size: 20px;
+    font-family:Georgia, 'Times New Roman', Times, serif
+}
+#Questions{
+    text-align: center;
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    color: rgb(43, 43, 192);
+    font-size: 40px;
+}
+body{
+    background-color: rgb(227, 231, 241);
+}
+#words{
+    color: rgb(8, 18, 109);
+    font-size: 30px;
+    text-align: center;
+    font-family:cursive
+}
+@keyframes pulsered{
+    0% {background-color: rgb(255, 0, 0);}
+    50% {background-color: white;}
+    100%{background-color: red;}
+}
+.pulse{
+    animation:pulsered 1.5s infinite ;
+}
+#nxtq,#restart{
+    font-size: 30px;
+    padding: 20px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    align-items: center;
+    border-radius: 10px;
+    border-color: rgb(22, 22, 139);
+    color: rgb(17, 131, 231);
+    font-family:Georgia, 'Times New Roman', Times, serif;}
+#rslt{
+    font-size: 30px;
+    color: rgb(30, 30, 196);
+    text-align: center;
+}
+h3{
+    text-align: center;
+    font-size: 30px;
+    color: rgb(25, 25, 228);
+
+}
+#scores{
+    color: rgb(0, 225, 0);
+    font-size: 25px;
+    text-align: center;
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+
+}
+#countdown,#ans{
+    font-size: 20px;
+    text-align: center;
+}
+
+#summary{
+    font-size: 25px;
+    text-align: center;
+    color: rgb(11, 48, 209);
+}
