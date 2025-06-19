@@ -10,7 +10,12 @@ h2{
     font-size: 40px;
     color: rgb(25, 25, 228);
 }
-
+#total{
+    text-align: end;
+    color: rgba(10, 10, 238, 0.925);
+    font-size: 20px;
+    font-family:monospace
+}
 #start{
     font-size: 40px;
     padding: 30px;
