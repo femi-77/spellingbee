@@ -11,6 +11,7 @@ const rslt=document.getElementById("rslt")
 const countdown=document.getElementById("countdown")
 const summary=document.getElementById("summary");
 const words=document.getElementById("words");
+const total=document.getElementById("total");
 const randoms=[ "Let's see how strong your spelling is! 🧠✨",
     "📚 The difference between try and triumph is a little umph!💥",
     "Spelling is the art of putting letters in the right place ✍️🔤",
@@ -131,7 +132,9 @@ let score=0
 let current=0;
 let num=0;
 let timer;
+let totals=20;
 function showq(){
+    total.innerText=`${totals} Questions left`;
     clearTimeout(timer);
     let timeleft=7;
     countdown.innerText=`⏳Time left:${timeleft}s`;
@@ -151,7 +154,7 @@ function showq(){
             clearInterval(timeinterval)
         }
     },1000)
-
+    
     const qu=question[current].Questions
     
     Questionn.innerText=qu;
@@ -171,16 +174,20 @@ function showq(){
         if(but.innerText===answ){
             answers.innerText=`Correct Answer✅🎉`
             but.style.backgroundColor="green";
-            score++;num++
-            scores.innerText=`🧠Your Score= ${score}/${num}`
+            score++;num++;totals--;
+            scores.innerText=`🧠Your Score= ${score}/${num}`;
+            
+            
             
         }
         else{
             answers.innerText=`Wrong Answer❌😞`
-            but.style.backgroundColor="red";num++
-            scores.innerText=`🧠Your Score= ${score}/${num}`
+            but.style.backgroundColor="red";num++;totals--;
+            scores.innerText=`🧠Your Score= ${score}/${num}`;
+            
             
         }
+        total.innerText=`${totals} Questions left`;
         const allbtn=document.querySelectorAll("#Options button");
         allbtn.forEach(but=>{
             but.disabled=true;
@@ -189,7 +196,7 @@ function showq(){
             }
         })
         
-        
+        total.innerText=`${totals} Questions left`;
         setTimeout(()=>{ 
             
             current++;
@@ -203,7 +210,8 @@ function showq(){
            scores.innerText=``
            rslt.innerText=`Congratulations!You scored ${score}/20🏆🎉`
            optionn.innerHTML = "";  
-           countdown.innerText="";   
+           countdown.innerText="";  
+           total.innerText=""; 
            if(score===20){
             summary.innerText=`Perfect Score! 💯🏆🎉 You're a spelling star! 🌟🧠`
         }
@@ -226,7 +234,7 @@ function showq(){
 //if no button clicked...auto go to nxt q
 timer=setTimeout(()=>{
     clearInterval(timeinterval)
-    current++;num++
+    current++;num++;totals--;
     if (current < question.length) {
         scores.innerText=`🧠Your Score= ${score}/${num}`
         showq(); 
@@ -237,10 +245,11 @@ timer=setTimeout(()=>{
         rslt.innerText=`Congragulations!You scored ${score}/20 🏆🎉`
         optionn.innerHTML = "";    
         countdown.innerText="";  
+        
         if(score===20){
             summary.innerText=`Perfect Score! 💯🏆🎉 You're a spelling star! 🌟🧠`
         }
-        else if(score>16){
+        else if(score>=16){
             summary.innerText=`Awesome! 17/20 🌟 You're almost perfect! 🧠🎯`
         }
         else if (score>11){
@@ -264,6 +273,8 @@ restart.addEventListener("click",function(){
     current=0;
     score=0;
     num=0;
+    totals=20;
+    
     body.classList.remove("pulse");
     scores.innerText=`Your Score:${score}`
     answers.innerText="";
