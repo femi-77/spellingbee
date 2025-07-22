@@ -12,6 +12,7 @@ const countdown=document.getElementById("countdown")
 const summary=document.getElementById("summary");
 const words=document.getElementById("words");
 const total=document.getElementById("total");
+const share=document.getElementById("share");
 const randoms=[ "Let's see how strong your spelling is! 🧠✨",
     "📚 The difference between try and triumph is a little umph!💥",
     "Spelling is the art of putting letters in the right place ✍️🔤",
@@ -128,6 +129,16 @@ const question=[
         answer: "Restaurant"
     }
 ];
+function shuffleArray(array) {
+    for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]]; // Swap elements
+    }
+}
+// Shuffle the questions array when the script loads
+shuffleArray(question);
+question.forEach(q => shuffleArray(q.Options));
+
 let score=0
 let current=0;
 let num=0;
@@ -136,7 +147,7 @@ let totals=20;
 function showq(){
     total.innerText=`${totals} Questions left`;
     clearTimeout(timer);
-    let timeleft=7;
+    let timeleft=10;
     countdown.innerText=`⏳Time left:${timeleft}s`;
     const timeinterval=setInterval(()=>{
         timeleft--;
@@ -227,8 +238,11 @@ function showq(){
         }
         else{
             summary.innerText=`😢 Don’t give up – you’ll improve! 🚀📖`;
-        }
-       }},1000) 
+        }showShareButton(score);
+       
+    }// Show share button after quiz ends
+
+},1000) 
     }
 );  optionn.appendChild(but); });
 //if no button clicked...auto go to nxt q
@@ -262,10 +276,33 @@ timer=setTimeout(()=>{
         else{
             summary.innerText=`😢 Don’t give up  you’ll improve! 🚀📖`;
         }
-    }},7000) 
+
+showShareButton(score);
+}},7000) 
     
 }
 showq();
+function showShareButton(score) {
+  const shareButton = document.getElementById("share");
+  shareButton.style.display = "inline-block";
+  shareButton.onclick = () => {
+    const message = `🧠 I scored ${score}/${question.length} in the Malayalam Spelling Bee! Try it now: https://femi-77.github.io/spellingbee/`;
+
+    if (navigator.share) {
+      navigator.share({
+        title: "Spelling Bee Quiz",
+        text: message,
+        url: "https://femi-77.github.io/spellingbee/",
+      })
+      .then(() => console.log("Shared successfully!"))
+      .catch((error) => console.log("Sharing failed:", error));
+    } else {
+      navigator.clipboard.writeText(message)
+        .then(() => alert("✅ Copied! Share your score anywhere."))
+        .catch(() => alert("❌ Copy failed."));
+    }
+  };
+}
 restart.addEventListener("click",function(){
     
     const confirmrestart=confirm("⚠️Are you are sure to restart the game?Scores you earned will lose")
@@ -278,8 +315,13 @@ restart.addEventListener("click",function(){
     body.classList.remove("pulse");
     scores.innerText=`Your Score:${score}`
     answers.innerText="";
-    
+    rslt.innerText="";
+    summary.innerText="";  
+    optionn.innerHTML = "";
+    countdown.innerText="";
     showq();
 
 }})
+
+
 
