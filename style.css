@@ -10,12 +10,7 @@ h2{
     font-size: 40px;
     color: rgb(25, 25, 228);
 }
-#total{
-    text-align: end;
-    color: rgba(10, 10, 238, 0.925);
-    font-size: 20px;
-    font-family:monospace
-}
+
 #start{
     font-size: 40px;
     padding: 30px;
@@ -31,25 +26,31 @@ h2{
     color: rgb(17, 131, 231);
     font-family:Georgia, 'Times New Roman', Times, serif;}
 #Options{
-    padding: 20px;
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
+    display: grid;                   
+    grid-template-columns: 1fr 1fr;  
+    gap: 15px;                       
+    margin: 20px auto;              
+    width: 40%; 
     text-align: center;
     border-radius: 10px;
     border-color: rgb(22, 22, 139);
     color: rgb(17, 131, 231);
 }
 #Options button{
-    padding: 20px;
+    padding: 12px 8px;              
+    font-size: 18px;                
+    background: #f0f8ff;            
+    border: 2px solid #4682b4;      
+    border-radius: 8px;             
+    cursor: pointer;                
+    transition: 0.3s;
     
-    text-align: center;
-    border-radius: 10px;
-    border-color: rgb(93, 19, 212);
-    color: rgb(79, 1, 180);
-    background-color: rgb(211, 230, 238);
-    font-size: 20px;
     font-family:Georgia, 'Times New Roman', Times, serif
+}
+#options button:hover {
+    background: #4682b4; 
+    color: white;
+    transform: scale(1.03); 
 }
 #Questions{
     text-align: center;
@@ -59,6 +60,12 @@ h2{
 }
 body{
     background-color: rgb(227, 231, 241);
+}
+#total{
+    text-align: end;
+    color: rgba(10, 10, 238, 0.925);
+    font-size: 20px;
+    font-family:monospace
 }
 #words{
     color: rgb(8, 18, 109);
@@ -84,19 +91,44 @@ body{
     align-items: center;
     border-radius: 10px;
     border-color: rgb(22, 22, 139);
-    color: rgb(17, 131, 231);
+    color: rgb(17, 46, 175);
+    cursor: pointer;
+    background-color: rgb(198, 198, 241);
     font-family:Georgia, 'Times New Roman', Times, serif;}
 #rslt{
     font-size: 30px;
     color: rgb(30, 30, 196);
     text-align: center;
 }
+
 h3{
     text-align: center;
     font-size: 30px;
     color: rgb(25, 25, 228);
 
 }
+#share {
+  display: none; 
+  margin-top: 20px;
+  padding: 10px 20px;
+  background-color:rgb(198, 198, 241);
+  font-weight: bold;
+  border: rgb(0, 30, 128) 2px solid;
+  border-radius: 10px;
+  font-size: 18px;
+  color:rgb(17, 46, 175);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+  
+}
+#result-buttons {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+  margin-top: 30px;
+}
+
 #scores{
     color: rgb(0, 225, 0);
     font-size: 25px;
