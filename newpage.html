@@ -4,11 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
     <meta name="author" content="Femi Sunil">
-    <meta name="description" content="This is my webpage">
+    <meta name="description" content="Test your spelling skills with this fun and interactive quiz! A fast, offline-ready spelling game you can install and play anytime. Challenge yourself and share your score with friends!">
     <title>
-        😉Quiz😉
+        Spelling Bee Quiz - Fun & Interactive Word Challenge
     </title>
     <script src="question.js" defer></script>
+    <link rel="manifest" href="manifest.json" />
+    <link rel="apple-touch-icon" href="cropped.png">
 
     <link rel="stylesheet" href="style.css">
 </head>
@@ -33,5 +35,18 @@
       <button id="share">📤 Share</button>
     </div>
         
-    
+    <script>
+  if ('serviceWorker' in navigator) {
+    window.addEventListener('load', function () {
+      navigator.serviceWorker.register('service-worker.js')
+        .then(function (registration) {
+          console.log('✅ ServiceWorker registered: ', registration.scope);
+        }, function (err) {
+          console.log('❌ ServiceWorker registration failed: ', err);
+        });
+    });
+  }
+</script>
 </body>
+
+</html>
