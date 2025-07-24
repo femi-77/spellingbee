@@ -22,10 +22,15 @@ const randoms=[ "Let's see how strong your spelling is! 🧠✨",
 "Spell like a bee, sting like a champ! 🐝🥇🐝",
 "Your brain is a muscle. Train it daily.🧠🏋️‍♂️📚"];
 
-setInterval(()=>{
-   const wordd=randoms[ Math.floor(Math.random()*randoms.length)]
-   words.innerText=`"${wordd}"`
-},2000)
+window.addEventListener("DOMContentLoaded", () => {
+  const words = document.getElementById("words");
+  if (!words) return;
+
+  setInterval(() => {
+    const wordd = randoms[Math.floor(Math.random() * randoms.length)];
+    words.innerText = `"${wordd}"`;
+  }, 2000);
+});
 
 const body=document.body;
 const question=[
@@ -278,7 +283,7 @@ timer=setTimeout(()=>{
         }
 
 showShareButton(score);
-}},7000) 
+}},10000) 
     
 }
 showq();
@@ -286,7 +291,7 @@ function showShareButton(score) {
   const shareButton = document.getElementById("share");
   shareButton.style.display = "inline-block";
   shareButton.onclick = () => {
-    const message = `🧠 I scored ${score}/${question.length} in the Malayalam Spelling Bee! Try it now: https://femi-77.github.io/spellingbee/`;
+    const message = `🧠 I scored ${score}/${question.length} in the Spelling Bee! Try it now: https://femi-77.github.io/spellingbee/`;
 
     if (navigator.share) {
       navigator.share({
@@ -305,7 +310,7 @@ function showShareButton(score) {
 }
 restart.addEventListener("click",function(){
     
-    const confirmrestart=confirm("⚠️Are you are sure to restart the game?Scores you earned will lose")
+    const confirmrestart=confirm("⚠️Are you are sure to restart the game?")
     if (confirmrestart){
     current=0;
     score=0;
@@ -322,6 +327,14 @@ restart.addEventListener("click",function(){
     showq();
 
 }})
+
+  if ('serviceWorker' in navigator) {
+    window.addEventListener('load', function() {
+      navigator.serviceWorker.register('service-worker.js')
+        .then(reg => console.log('Service Worker registered:', reg))
+        .catch(err => console.log('Service Worker failed:', err));
+    });
+  }
 
 
 
