@@ -291,13 +291,14 @@ function showShareButton(score) {
   const shareButton = document.getElementById("share");
   shareButton.style.display = "inline-block";
   shareButton.onclick = () => {
-    const message = `🧠 I scored ${score}/${question.length} in the Spelling Bee! Try it now:`;
+    const url = "https://femi-77.github.io/spellingbee/";
+    const message = `🧠 I scored ${score}/${question.length} in the Spelling Bee! Try it now: ${url}`;
 
     if (navigator.share) {
       navigator.share({
         title: "Spelling Bee Quiz",
         text: message,
-        url: "https://femi-77.github.io/spellingbee/",
+        url: url,
       })
       .then(() => console.log("Shared successfully!"))
       .catch((error) => console.log("Sharing failed:", error));
