@@ -30,7 +30,8 @@ h2{
     grid-template-columns: 1fr 1fr;  
     gap: 15px;                       
     margin: 20px auto;              
-    width: 40%; 
+    width: 100%; 
+    padding: 0 10px;
     text-align: center;
     border-radius: 10px;
     border-color: rgb(22, 22, 139);
@@ -43,7 +44,7 @@ h2{
     border: 2px solid #4682b4;      
     border-radius: 8px;             
     cursor: pointer;                
-    transition: 0.3s;
+   
     
     font-family:Georgia, 'Times New Roman', Times, serif
 }
@@ -81,6 +82,7 @@ body{
 .pulse{
     animation:pulsered 1.5s infinite ;
 }
+
 #nxtq,#restart{
     font-size: 30px;
     padding: 20px;
@@ -100,12 +102,10 @@ body{
     color: rgb(30, 30, 196);
     text-align: center;
 }
-
 h3{
     text-align: center;
     font-size: 30px;
     color: rgb(25, 25, 228);
-
 }
 #share {
   display: none; 
@@ -119,7 +119,6 @@ h3{
   color:rgb(17, 46, 175);
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
   cursor: pointer;
-  
 }
 #result-buttons {
   display: flex;
