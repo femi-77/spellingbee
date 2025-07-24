@@ -291,7 +291,7 @@ function showShareButton(score) {
   const shareButton = document.getElementById("share");
   shareButton.style.display = "inline-block";
   shareButton.onclick = () => {
-    const message = `🧠 I scored ${score}/${question.length} in the Spelling Bee! Try it now: https://femi-77.github.io/spellingbee/`;
+    const message = `🧠 I scored ${score}/${question.length} in the Spelling Bee! Try it now:`;
 
     if (navigator.share) {
       navigator.share({
