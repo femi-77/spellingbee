@@ -12,6 +12,7 @@ const countdown=document.getElementById("countdown")
 const summary=document.getElementById("summary");
 const words=document.getElementById("words");
 const total=document.getElementById("total");
+const final=document.getElementById("final");
 const share=document.getElementById("share");
 const randoms=[ "Let's see how strong your spelling is! 🧠✨",
     "📚 The difference between try and triumph is a little umph!💥",
@@ -31,7 +32,7 @@ window.addEventListener("DOMContentLoaded", () => {
     words.innerText = `"${wordd}"`;
   }, 2000);
 });
-
+let userResponses = [];
 const body=document.body;
 const question=[
     {Questions:"Which is correct?",
@@ -151,10 +152,9 @@ let timer;
 let totals=20;
 function showq(){
     total.innerText=`${totals} Questions left`;
-    clearTimeout(timer);
+    clearInterval(timer);
     let timeleft=10;
-    countdown.innerText=`⏳Time left:${timeleft}s`;
-    const timeinterval=setInterval(()=>{
+    countdown.innerText=`⏳Time left:${timeleft}s`;    const timeinterval=setInterval(()=>{
         timeleft--;
         countdown.innerText=`⏳Time left:${timeleft}s`;
         if(timeleft<3 ){
@@ -175,7 +175,7 @@ function showq(){
     
     Questionn.innerText=qu;
     optionn.innerHTML = "";
-    answers.innerHTML=""
+    answers.innerHTML="";
     const an=question[current].Options
     an.forEach(options => {
         const but=document.createElement("button");
@@ -203,6 +203,12 @@ function showq(){
             
             
         }
+        userResponses.push({
+                question: question[current].Questions,
+                options: [...question[current].Options],
+                correct: question[current].answer,
+                selected:  but.innerText
+            });
         total.innerText=`${totals} Questions left`;
         const allbtn=document.querySelectorAll("#Options button");
         allbtn.forEach(but=>{
@@ -229,21 +235,23 @@ function showq(){
            countdown.innerText="";  
            total.innerText=""; 
            if(score===20){
-            summary.innerText=`Perfect Score! 💯🏆🎉 You're a spelling star! 🌟🧠`
+            final.innerText=`Perfect Score! 💯🏆🎉 You're a spelling star! 🌟🧠`
         }
         else if(score>16){
-            summary.innerText=`Awesome! 17/20 🌟 You're almost perfect! 🧠🎯`
+            final.innerText=`Awesome! 17/20 🌟 You're almost perfect! 🧠🎯`
         }
         else if (score>=10){
-            summary.innerText=`👍✨🧠 Great job! Keep learning!`
+            final.innerText=`👍✨🧠 Great job! Keep learning!`
 
         }
         else if (score>6){
-            summary.innerText=`😅💪 Needs improvement!`;
+            final.innerText=`😅💪 Needs improvement!`;
         }
         else{
-            summary.innerText=`😢 Don’t give up – you’ll improve! 🚀📖`;
-        }showShareButton(score);
+            final.innerText=`😢 Don’t give up – you’ll improve! 🚀📖`;
+        }showWrongSummary();
+        showShareButton(score);
+        
        
     }// Show share button after quiz ends
 
@@ -253,6 +261,12 @@ function showq(){
 //if no button clicked...auto go to nxt q
 timer=setTimeout(()=>{
     clearInterval(timeinterval)
+     userResponses.push({
+                question: question[current].Questions,
+                options: [...question[current].Options],
+                correct: question[current].answer,
+                selected: "Not answered"
+            });
     current++;num++;totals--;
     if (current < question.length) {
         scores.innerText=`🧠Your Score= ${score}/${num}`
@@ -261,31 +275,54 @@ timer=setTimeout(()=>{
         Questionn.innerText = "Quiz finished!";
         answers.innerText=``;
         scores.innerText=``
-        rslt.innerText=`Congragulations!You scored ${score}/20 🏆🎉`
+        rslt.innerText=`Congratulations!You scored ${score}/20 🏆🎉`
         optionn.innerHTML = "";    
         countdown.innerText="";  
         
         if(score===20){
-            summary.innerText=`Perfect Score! 💯🏆🎉 You're a spelling star! 🌟🧠`
+            final.innerText=`Perfect Score! 💯🏆🎉 You're a spelling star! 🌟🧠`
         }
-        else if(score>=16){
-            summary.innerText=`Awesome! 17/20 🌟 You're almost perfect! 🧠🎯`
+        else if(score>16){
+            final.innerText=`Awesome!  🌟 You're almost perfect! 🧠🎯`
         }
-        else if (score>11){
-            summary.innerText=`👍✨🧠 "Great job! Keep learning!`
+        else if (score>=10){
+            final.innerText=`👍✨🧠 Great job! Keep learning!`
 
         }
         else if (score>6){
-            summary.innerText=`😅💪 "Needs improvement!`;
+            final.innerText=`😅💪 Needs improvement!`;
         }
         else{
-            summary.innerText=`😢 Don’t give up  you’ll improve! 🚀📖`;
+            final.innerText=`😢 Don’t give up – you’ll improve! 🚀📖`;
         }
 
 showShareButton(score);
+showWrongSummary();
 }},10000) 
-    
+
+} // <-- End of showq
+
+function showWrongSummary() {
+    summary.innerHTML = `<h3>📋 Questions You Missed:</h3>`;
+
+    const wrongOnly = userResponses.filter(q => q.selected !== q.correct);
+
+    if (wrongOnly.length === 0) {
+        summary.innerHTML += `<p>🎉 Amazing! You got all answers correct!</p>`;
+    } else {
+        wrongOnly.forEach((q) => {
+            summary.innerHTML += `
+                <div style="border:1px solid #ccc; padding:10px; margin:10px 0; border-radius:8px; background:#f8d7da">
+                    <p><strong>Q:</strong> ${q.question}</p>
+                    <p><strong>Your Answer:</strong> ${q.selected === "Not answered" ? "❌ Not answered" : `${q.selected} ❌`}</p>
+                    <p><strong>Correct Answer:</strong> ${q.correct}✅ </p>
+                </div>
+            `;
+        });
+    }
 }
+
+
 showq();
 function showShareButton(score) {
   const shareButton = document.getElementById("share");
@@ -317,12 +354,14 @@ restart.addEventListener("click",function(){
     score=0;
     num=0;
     totals=20;
+    userResponses = [];
     
     body.classList.remove("pulse");
     scores.innerText=`Your Score:${score}`
     answers.innerText="";
     rslt.innerText="";
     summary.innerText="";  
+    final.innerText="";
     optionn.innerHTML = "";
     countdown.innerText="";
     showq();
