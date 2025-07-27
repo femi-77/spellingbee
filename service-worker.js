@@ -1,4 +1,4 @@
-const CACHE_NAME = 'spellingbee-cache-v1';
+const CACHE_NAME = 'spellingbee-cache-v3';
 const urlsToCache = [
   './index.html',
   './newpage.html',
@@ -15,6 +15,17 @@ self.addEventListener('install', event => {
     caches.open(CACHE_NAME)
       .then(cache => cache.addAll(urlsToCache))
       .catch(err => console.error("❌ Cache install failed:", err))
+  );
+});
+
+// Activate event: delete old caches
+self.addEventListener('activate', event => {
+  event.waitUntil(
+    caches.keys().then(cacheNames => {
+      return Promise.all(
+        cacheNames.filter(name => name !== CACHE_NAME).map(name => caches.delete(name))
+      );
+    })
   );
 });
 
