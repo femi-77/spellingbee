@@ -8,7 +8,6 @@ const urlsToCache = [
   './cropped.png',
   './crop.png'
 ];
-
 // Install event
 self.addEventListener('install', event => {
   event.waitUntil(
