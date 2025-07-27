@@ -97,7 +97,7 @@ body{
     cursor: pointer;
     background-color: rgb(198, 198, 241);
     font-family:Georgia, 'Times New Roman', Times, serif;}
-#rslt{
+#rslt,#final{
     font-size: 30px;
     color: rgb(30, 30, 196);
     text-align: center;
